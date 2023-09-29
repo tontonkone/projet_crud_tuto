@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 class Etudiant extends Model
 {
     use HasFactory;
+    // Les colonnes de la table 'etudiants' qui peuvent être remplies 
+
+    protected $fillable = ["nom", "prenom", "classe_id"];
 
     /**
      * Définit une relation "appartient à" entre la table 'etudiants' et la table 'classes'.
