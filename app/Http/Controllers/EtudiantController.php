@@ -28,6 +28,13 @@ class EtudiantController extends Controller
         return view("createEtudiant", compact("classes"));
     }
 
+    
+    public function edit(Etudiant $etudiant){
+        $classes = Classe::all();
+        return view("editEtudiant", compact("etudiant","classes"));
+    }
+
+
     public function store(Request $request){
         $request->validate([
             "nom"=>"required",
@@ -49,4 +56,21 @@ class EtudiantController extends Controller
         $etudiant->delete();
         return back()->with("successDelete", "Etudiant $nomComplet supprimé !");
     }
+
+    public function update(Request $request, Etudiant $etudiant){
+        $request->validate([
+            "nom"=>"required",
+            "prenom"=>"required",
+            "classe_id"=>"required"
+        ]);
+
+        $etudiant->update([
+            "nom"=>$request->nom,
+            "prenom"=>$request->prenom,
+            "classe_id"=>$request->classe_id
+        ]);
+
+        return back()->with("success", "Etudiant mis à jour avec succès!");
+    }
+
 }
